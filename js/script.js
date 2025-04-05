@@ -1,45 +1,30 @@
-let cart = document.querySelector('.shopping-cart');
-
-document.querySelector('#cart-btn').onclick = () =>{
-  cart.classList.toggle('active');
-  login.classList.remove('active');
-  navbar.classList.remove('active');
-}
-
-
 let navbar = document.querySelector('.navbar');
 
 document.querySelector('#menu-btn').onclick = () =>{
   navbar.classList.toggle('active');
-  cart.classList.remove('active');
-  login.classList.remove('active');
 }
 
-window.onscroll = () =>{
-  login.classList.remove('active');
-  navbar.classList.remove('active');
-  cart.classList.remove('active');
-}
+  document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".hero-slide");
+    let currentSlide = 0;
 
-var swiper = new swiper(".review-slider", {
-  spaceBetween:20,
-  centeredSlides: true,
-  autoplay: {
-    delay: 7500,
-    disableOnInteraction: false,
-  },
-  loop: true,
-  breakpoints: {
-    0:{
-      slidesPerView: 1,
-    },
-    768:{
-      slidesPerView: 2,
-    },
-    991:{
-      slidesPerView: 3,
-    },
-  },
-});
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) {
+          slide.classList.add("active");
+        }
+      });
+    }
 
-let openShopping = document.querySelector('.shopping');
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    // Show the first slide initially
+    showSlide(currentSlide);
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+  });
